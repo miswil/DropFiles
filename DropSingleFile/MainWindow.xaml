@@ -1,0 +1,30 @@
+﻿<Window x:Class="DropSingleFile.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DropSingleFile"
+        mc:Ignorable="d"
+        Title="DragSingleFile" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="text"
+                 Margin="20"
+                 Height="200"
+                 HorizontalAlignment="Stretch"
+                 AcceptsReturn="True"
+                 Text="This text will be written to a file."/>
+        <Border Grid.Row="1"
+                Margin="20"
+                Background="Yellow"
+                MouseMove="Border_MouseMove">
+            <TextBlock Text="Drag me"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="36"/>
+        </Border>
+    </Grid>
+</Window>
