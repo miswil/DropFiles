@@ -11,7 +11,12 @@
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <TextBox x:Name="text"
+                 Grid.ColumnSpan="2"
                  Margin="20"
                  Height="200"
                  HorizontalAlignment="Stretch"
@@ -26,5 +31,11 @@
                        VerticalAlignment="Center"
                        FontSize="36"/>
         </Border>
+        <Button Grid.Row="1" Grid.Column="1"
+                Margin="20"
+                FontSize="36"
+                Click="Button_Click">
+            Copy File
+        </Button>
     </Grid>
 </Window>

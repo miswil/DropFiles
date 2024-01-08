@@ -28,12 +28,24 @@ namespace DropSingleFile
             {
                 return;
             }
+            var data = this.CreateDataObject();
+            DragDrop.DoDragDrop((Border)sender, data, DragDropEffects.Copy);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var data = this.CreateDataObject();
+            Clipboard.SetDataObject(data);
+        }
+
+        private object CreateDataObject()
+        {
             var fileContents = new MemoryStream(Encoding.UTF8.GetBytes(this.text.Text));
             var fileSize = fileContents.Length;
             var data = new DataObject();
             data.SetFileGroupDescriptor("example.txt", fileSize: fileSize);
             data.SetFileContents(fileContents);
-            DragDrop.DoDragDrop((Border)sender, data, DragDropEffects.Copy);
+            return data;
         }
     }
 }

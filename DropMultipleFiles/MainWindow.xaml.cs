@@ -28,6 +28,18 @@ namespace DropMultipleFiles
             {
                 return;
             }
+            var data = this.CreateDataObject();
+            DragDrop.DoDragDrop((Border)sender, data, DragDropEffects.Copy);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var data = this.CreateDataObject();
+            Clipboard.SetDataObject(data);
+        }
+
+        private object CreateDataObject()
+        {
             var originalContents = new MemoryStream(Encoding.UTF8.GetBytes(this.text.Text));
             var upeerContents = new MemoryStream(Encoding.UTF8.GetBytes(this.text.Text.ToUpper()));
             var lowerContents = new MemoryStream(Encoding.UTF8.GetBytes(this.text.Text.ToLower()));
@@ -46,7 +58,7 @@ namespace DropMultipleFiles
                 upeerContents,
                 lowerContents,
             });
-            DragDrop.DoDragDrop((Border)sender, data, DragDropEffects.Copy);
+            return data;
         }
     }
 }
