@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Windows;
 
-namespace DropMultipleFiles
+namespace DropMultipleFilesWpf
 {
     class MyDataObject : IDataObject
     {
@@ -30,7 +30,7 @@ namespace DropMultipleFiles
 
         public object GetData(string format, bool autoConvert)
         {
-            if (format == "FileContents" && 
+            if (format == "FileContents" &&
                 this.fileContents is not null &&
                 this.fileContents.MoveNext())
             {

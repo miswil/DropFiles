@@ -1,9 +1,9 @@
-﻿<Window x:Class="DropMultipleFiles.MainWindow"
+﻿<Window x:Class="DropMultipleFilesWpf.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DropMultipleFiles"
+        xmlns:local="clr-namespace:DropMultipleFilesWpf"
         mc:Ignorable="d"
         Title="DragMultipleFiles" Height="450" Width="800">
     <Grid>

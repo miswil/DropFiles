@@ -1,4 +1,4 @@
-﻿namespace DropMultipleFiles
+﻿namespace DropMultipleFilesWpf
 {
     internal interface IDroppedObjectInfo
     {

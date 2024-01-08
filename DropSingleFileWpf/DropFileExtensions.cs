@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Windows;
 
-namespace DropSingleFile
+namespace DropSingleFileWpf
 {
     internal static class DropFileExtensions
     {

@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace DropMultipleFiles
+namespace DropSingleFileWpf
 {
     /// <summary>
     /// Interaction logic for App.xaml

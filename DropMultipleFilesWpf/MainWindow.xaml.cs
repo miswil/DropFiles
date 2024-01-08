@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DropSingleFile
+namespace DropMultipleFilesWpf
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -40,11 +40,24 @@ namespace DropSingleFile
 
         private object CreateDataObject()
         {
-            var fileContents = new MemoryStream(Encoding.UTF8.GetBytes(this.text.Text));
-            var fileSize = fileContents.Length;
-            var data = new DataObject();
-            data.SetFileGroupDescriptor("example.txt", fileSize: fileSize);
-            data.SetFileContents(fileContents);
+            var originalContents = new MemoryStream(Encoding.UTF8.GetBytes(this.text.Text));
+            var upeerContents = new MemoryStream(Encoding.UTF8.GetBytes(this.text.Text.ToUpper()));
+            var lowerContents = new MemoryStream(Encoding.UTF8.GetBytes(this.text.Text.ToLower()));
+            var fileSize = originalContents.Length;
+            var data = new MyDataObject();
+            data.SetFileGroupDescriptor(new IDroppedObjectInfo[]
+            {
+                new DroppedDirectoryInfo("Files by drag & drop"),
+                new DroppedFileInfo("Files by drag & drop\\original.txt", Size: fileSize),
+                new DroppedFileInfo("Files by drag & drop\\upper.txt", Size: fileSize),
+                new DroppedFileInfo("Files by drag & drop\\lower.txt", Size: fileSize),
+            });
+            data.SetFileContents(new Stream[]
+            {
+                originalContents,
+                upeerContents,
+                lowerContents,
+            });
             return data;
         }
     }

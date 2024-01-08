@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 
-namespace DropSingleFile
+namespace DropSingleFileWpf
 {
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     public struct FILEDESCRIPTOR
@@ -36,7 +36,7 @@ namespace DropSingleFile
     }
 
     [Flags]
-    public enum FileDescriptorFlags : UInt32
+    public enum FileDescriptorFlags : uint
     {
         FD_CLSID = 0x00000001,
         FD_SIZEPOINT = 0x00000002,
@@ -85,8 +85,8 @@ namespace DropSingleFile
             }
             if (fileSize is not null)
             {
-                fileDescriptor.nFileSizeHigh = (uint)(((long)fileSize) >> 32);
-                fileDescriptor.nFileSizeLow = (uint)(((long)fileSize) & 0xFFFFFFFF);
+                fileDescriptor.nFileSizeHigh = (uint)((long)fileSize >> 32);
+                fileDescriptor.nFileSizeLow = (uint)((long)fileSize & 0xFFFFFFFF);
                 fileDescriptor.dwFlags |= FileDescriptorFlags.FD_FILESIZE;
             }
             return fileDescriptor;

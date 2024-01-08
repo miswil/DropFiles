@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropSingleFile", "DropSingleFile\DropSingleFile.csproj", "{E8AA0085-EB9F-437E-8D9C-5890F4829303}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DropSingleFileWpf", "DropSingleFileWpf\DropSingleFileWpf.csproj", "{E8AA0085-EB9F-437E-8D9C-5890F4829303}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropMultipleFiles", "DropMultipleFiles\DropMultipleFiles.csproj", "{B449439A-988F-4454-8A13-0550B8269209}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DropMultipleFilesWpf", "DropMultipleFilesWpf\DropMultipleFilesWpf.csproj", "{B449439A-988F-4454-8A13-0550B8269209}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

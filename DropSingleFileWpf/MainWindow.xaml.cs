@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using DropSingleFileWpf;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DropMultipleFiles
+namespace DropSingleFileWpf
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -40,24 +41,11 @@ namespace DropMultipleFiles
 
         private object CreateDataObject()
         {
-            var originalContents = new MemoryStream(Encoding.UTF8.GetBytes(this.text.Text));
-            var upeerContents = new MemoryStream(Encoding.UTF8.GetBytes(this.text.Text.ToUpper()));
-            var lowerContents = new MemoryStream(Encoding.UTF8.GetBytes(this.text.Text.ToLower()));
-            var fileSize = originalContents.Length;
-            var data = new MyDataObject();
-            data.SetFileGroupDescriptor(new IDroppedObjectInfo[]
-            {
-                new DroppedDirectoryInfo("Files by drag & drop"),
-                new DroppedFileInfo("Files by drag & drop\\original.txt", Size: fileSize),
-                new DroppedFileInfo("Files by drag & drop\\upper.txt", Size: fileSize),
-                new DroppedFileInfo("Files by drag & drop\\lower.txt", Size: fileSize),
-            });
-            data.SetFileContents(new Stream[]
-            {
-                originalContents,
-                upeerContents,
-                lowerContents,
-            });
+            var fileContents = new MemoryStream(Encoding.UTF8.GetBytes(this.text.Text));
+            var fileSize = fileContents.Length;
+            var data = new DataObject();
+            data.SetFileGroupDescriptor("example.txt", fileSize: fileSize);
+            data.SetFileContents(fileContents);
             return data;
         }
     }
