@@ -33,11 +33,12 @@ namespace DropMultipleFiles
             var lowerContents = new MemoryStream(Encoding.UTF8.GetBytes(this.text.Text.ToLower()));
             var fileSize = originalContents.Length;
             var data = new MyDataObject();
-            data.SetFileGroupDescriptor(new DropFileInfo[]
+            data.SetFileGroupDescriptor(new IDroppedObjectInfo[]
             {
-                new DropFileInfo("original.txt", Size: fileSize),
-                new DropFileInfo("upper.txt", Size: fileSize),
-                new DropFileInfo("lower.txt", Size: fileSize),
+                new DroppedDirectoryInfo("Files by drag & drop"),
+                new DroppedFileInfo("Files by drag & drop\\original.txt", Size: fileSize),
+                new DroppedFileInfo("Files by drag & drop\\upper.txt", Size: fileSize),
+                new DroppedFileInfo("Files by drag & drop\\lower.txt", Size: fileSize),
             });
             data.SetFileContents(new Stream[]
             {

@@ -8,22 +8,19 @@ namespace DropMultipleFiles
     {
         public static void SetFileGroupDescriptor(
             this IDataObject dataObject,
-            IEnumerable<DropFileInfo> files)
+            IEnumerable<IDroppedObjectInfo> dropedObjects)
         {
             var fileGroupDescriptorBinary = new MemoryStream();
-            fileGroupDescriptorBinary.Write(BitConverter.GetBytes(files.Count()));
+            fileGroupDescriptorBinary.Write(BitConverter.GetBytes(dropedObjects.Count()));
 
             var fdSize = Marshal.SizeOf<FILEDESCRIPTOR>();
             var fdArray = new byte[fdSize];
             var fdPtr = Marshal.AllocHGlobal(fdSize);
             try
             {
-                foreach (var file in files)
+                foreach (var droppedObject in dropedObjects)
                 {
-                    var fileDescriptor = new FILEDESCRIPTORFactory().Create(
-                        file.Name,
-                        file.CreationTime, file.LastAccessTime, file.LastWriteTime,
-                        file.Size);
+                    var fileDescriptor = droppedObject.ToFILEDESCRIPTOR();
                     Marshal.StructureToPtr(fileDescriptor, fdPtr, false);
                     Marshal.Copy(fdPtr, fdArray, 0, fdSize);
                     fileGroupDescriptorBinary.Write(fdArray);
