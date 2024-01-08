@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DropSingleFileWpf"
         mc:Ignorable="d"
-        Title="DragSingleFile" Height="450" Width="800">
+        Title="DragSingleFileWpf" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
