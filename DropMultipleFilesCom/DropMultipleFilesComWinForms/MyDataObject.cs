@@ -20,12 +20,12 @@ namespace DropMultipleFilesComWinForms
         }
 
         #region System.Windows.Forms.IDataObject interfaces
-        public object GetData(Type format)
+        public object? GetData(Type format)
         {
             return this.GetData(format.FullName!);
         }
 
-        public object GetData(string format)
+        public object? GetData(string format)
         {
             return this.GetData(format, true);
         }
