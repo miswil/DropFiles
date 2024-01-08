@@ -9,6 +9,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DropMultipleFilesWpf", "Dro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DropMultipleFilesComWpf", "DropMultipleFilesComWpf\DropMultipleFilesComWpf.csproj", "{0E3BC00F-7879-491D-AC7E-24940540D4E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropSingleFileWinForms", "DropSingleFileWinForms\DropSingleFileWinForms.csproj", "{A0C753D2-FCC5-4CF8-8B01-43447FF95F50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropMultiFilesWinForms", "DropMultiFilesWinForms\DropMultiFilesWinForms.csproj", "{B44FB7EE-72D6-4A29-9659-6F4FB0354B91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropMultipleFilesComWinForms", "DropMultipleFilesComWinForms\DropMultipleFilesComWinForms.csproj", "{10B79CD2-8CDA-4684-BE33-2BECAC118BAE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DragSingleFile", "DragSingleFile", "{50693C77-C189-40F3-AB69-BE5E8FAB549B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DragMultipleFiles", "DragMultipleFiles", "{7C4C1BE3-6736-42BA-8192-E561FC65F2A7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DragMultipleFilesCom", "DragMultipleFilesCom", "{48F584DC-D3BA-4E40-AFED-9D5E119E6E87}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +39,29 @@ Global
 		{0E3BC00F-7879-491D-AC7E-24940540D4E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E3BC00F-7879-491D-AC7E-24940540D4E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E3BC00F-7879-491D-AC7E-24940540D4E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0C753D2-FCC5-4CF8-8B01-43447FF95F50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0C753D2-FCC5-4CF8-8B01-43447FF95F50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0C753D2-FCC5-4CF8-8B01-43447FF95F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0C753D2-FCC5-4CF8-8B01-43447FF95F50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B44FB7EE-72D6-4A29-9659-6F4FB0354B91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B44FB7EE-72D6-4A29-9659-6F4FB0354B91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B44FB7EE-72D6-4A29-9659-6F4FB0354B91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B44FB7EE-72D6-4A29-9659-6F4FB0354B91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10B79CD2-8CDA-4684-BE33-2BECAC118BAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10B79CD2-8CDA-4684-BE33-2BECAC118BAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10B79CD2-8CDA-4684-BE33-2BECAC118BAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10B79CD2-8CDA-4684-BE33-2BECAC118BAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E8AA0085-EB9F-437E-8D9C-5890F4829303} = {50693C77-C189-40F3-AB69-BE5E8FAB549B}
+		{B449439A-988F-4454-8A13-0550B8269209} = {7C4C1BE3-6736-42BA-8192-E561FC65F2A7}
+		{0E3BC00F-7879-491D-AC7E-24940540D4E6} = {48F584DC-D3BA-4E40-AFED-9D5E119E6E87}
+		{A0C753D2-FCC5-4CF8-8B01-43447FF95F50} = {50693C77-C189-40F3-AB69-BE5E8FAB549B}
+		{B44FB7EE-72D6-4A29-9659-6F4FB0354B91} = {7C4C1BE3-6736-42BA-8192-E561FC65F2A7}
+		{10B79CD2-8CDA-4684-BE33-2BECAC118BAE} = {48F584DC-D3BA-4E40-AFED-9D5E119E6E87}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {555731B5-9D78-4ECB-81FA-420E09D891C7}
