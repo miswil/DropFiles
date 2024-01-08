@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DropSingleFileWpf", "DropSi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DropMultipleFilesWpf", "DropMultipleFilesWpf\DropMultipleFilesWpf.csproj", "{B449439A-988F-4454-8A13-0550B8269209}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DropMultipleFilesComWpf", "DropMultipleFilesComWpf\DropMultipleFilesComWpf.csproj", "{0E3BC00F-7879-491D-AC7E-24940540D4E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B449439A-988F-4454-8A13-0550B8269209}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B449439A-988F-4454-8A13-0550B8269209}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B449439A-988F-4454-8A13-0550B8269209}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E3BC00F-7879-491D-AC7E-24940540D4E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E3BC00F-7879-491D-AC7E-24940540D4E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E3BC00F-7879-491D-AC7E-24940540D4E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E3BC00F-7879-491D-AC7E-24940540D4E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
