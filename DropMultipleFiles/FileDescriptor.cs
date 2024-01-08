@@ -3,7 +3,7 @@ using System.Runtime.InteropServices.ComTypes;
 
 namespace DropMultipleFiles
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     public struct FILEDESCRIPTOR
     {
         [MarshalAs(UnmanagedType.U4)]
