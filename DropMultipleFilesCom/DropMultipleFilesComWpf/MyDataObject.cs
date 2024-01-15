@@ -149,8 +149,6 @@ namespace DropMultipleFilesComWpf
 
         void IComDataObject.SetData(ref FORMATETC formatIn, ref STGMEDIUM medium, bool release)
         {
-            var format = DataFormats.GetDataFormat(formatIn.cfFormat).Name;
-            Debug.WriteLine(format);
             ((IComDataObject)this.dataObject).SetData(ref formatIn, ref medium, release);
         }
         #endregion System.Runtime.InteropServices.ComTypes.IDataObject interfaces
