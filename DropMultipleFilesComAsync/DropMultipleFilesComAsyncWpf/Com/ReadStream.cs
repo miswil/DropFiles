@@ -4,7 +4,7 @@ using System.Runtime.InteropServices.ComTypes;
 
 namespace DropMultipleFilesComAsyncWpf.Com
 {
-    internal class ReadStream : IStream
+    internal sealed class ReadStream : IStream, IDisposable
     {
         private readonly Stream proxiedStream;
 
@@ -48,6 +48,12 @@ namespace DropMultipleFilesComAsyncWpf.Com
                 default:
                     throw new IOException();
             }
+        }
+
+        public void Dispose()
+        {
+            this.proxiedStream.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         #region NotSupported

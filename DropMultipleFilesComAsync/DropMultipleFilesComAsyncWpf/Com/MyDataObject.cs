@@ -8,7 +8,7 @@ using IComDataObject = System.Runtime.InteropServices.ComTypes.IDataObject;
 
 namespace DropMultipleFilesComAsyncWpf.Com
 {
-    class MyDataObject : IComDataObject, IDataObjectAsyncCapability
+    class MyDataObject : IComDataObject, IDataObjectAsyncCapability, IDisposable
     {
         private static readonly short FileGroupDescriptorId;
         private static readonly short FileContentsId;
@@ -17,6 +17,7 @@ namespace DropMultipleFilesComAsyncWpf.Com
         private IList<Func<Task<Stream>>?>? fcFetches;
         private bool isAsync;
         private bool isInAsyncOperation;
+        private List<ReadStream> fetchedStreams = new();
 
         static MyDataObject()
         {
@@ -121,6 +122,7 @@ namespace DropMultipleFilesComAsyncWpf.Com
                 var fcFetch = this.fcFetches![format.lindex];
                 var stream = fcFetch!().Result;
                 var comStream = new ReadStream(stream);
+                this.fetchedStreams.Add(comStream);
                 medium.unionmember = Marshal.GetIUnknownForObject(comStream);
                 medium.tymed = TYMED.TYMED_ISTREAM;
             }
@@ -227,6 +229,14 @@ namespace DropMultipleFilesComAsyncWpf.Com
             {
                 SafeNativeMethods.GlobalFree(handle);
                 throw;
+            }
+        }
+
+        public void Dispose()
+        {
+            foreach (var fetchedStream in this.fetchedStreams)
+            {
+                fetchedStream.Dispose();
             }
         }
 
