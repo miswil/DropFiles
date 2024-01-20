@@ -23,7 +23,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DropMultipleFilesCom", "Dro
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DropMultipleFilesComAsync", "DropMultipleFilesComAsync", "{FA7F2027-C1EE-40EC-A71F-AEADA3AA5DF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropMultipleFilesComAsyncWpf", "DropMultipleFilesComAsync\DropMultipleFilesComAsyncWpf\DropMultipleFilesComAsyncWpf.csproj", "{D42C331F-15EC-4DAD-919F-B46B71AE499E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DropMultipleFilesComAsyncWpf", "DropMultipleFilesComAsync\DropMultipleFilesComAsyncWpf\DropMultipleFilesComAsyncWpf.csproj", "{D42C331F-15EC-4DAD-919F-B46B71AE499E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropMultipleFilesComAsyncWinForms", "DropMultipleFilesComAsync\DropMultipleFilesComAsyncWinForms\DropMultipleFilesComAsyncWinForms.csproj", "{404613F0-3D88-4C9F-97F8-6C7BD2CC8B44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{D42C331F-15EC-4DAD-919F-B46B71AE499E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D42C331F-15EC-4DAD-919F-B46B71AE499E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D42C331F-15EC-4DAD-919F-B46B71AE499E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{404613F0-3D88-4C9F-97F8-6C7BD2CC8B44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{404613F0-3D88-4C9F-97F8-6C7BD2CC8B44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{404613F0-3D88-4C9F-97F8-6C7BD2CC8B44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{404613F0-3D88-4C9F-97F8-6C7BD2CC8B44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +77,7 @@ Global
 		{B44FB7EE-72D6-4A29-9659-6F4FB0354B91} = {7C4C1BE3-6736-42BA-8192-E561FC65F2A7}
 		{10B79CD2-8CDA-4684-BE33-2BECAC118BAE} = {48F584DC-D3BA-4E40-AFED-9D5E119E6E87}
 		{D42C331F-15EC-4DAD-919F-B46B71AE499E} = {FA7F2027-C1EE-40EC-A71F-AEADA3AA5DF3}
+		{404613F0-3D88-4C9F-97F8-6C7BD2CC8B44} = {FA7F2027-C1EE-40EC-A71F-AEADA3AA5DF3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {555731B5-9D78-4ECB-81FA-420E09D891C7}
