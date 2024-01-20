@@ -2,7 +2,6 @@
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Windows;
-using System.Windows.Documents;
 using IComDataObject = System.Runtime.InteropServices.ComTypes.IDataObject;
 
 

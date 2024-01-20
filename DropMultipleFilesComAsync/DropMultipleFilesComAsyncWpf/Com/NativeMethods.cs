@@ -1,5 +1,4 @@
 ﻿using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.ComTypes;
 using System.Windows;
 using IComDataObject = System.Runtime.InteropServices.ComTypes.IDataObject;
 
