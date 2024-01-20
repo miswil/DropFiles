@@ -19,6 +19,9 @@ namespace DropMultipleFilesComAsyncWpf.Com
         private bool isInAsyncOperation;
         private List<ReadStream> fetchedStreams = new();
 
+        public event EventHandler<EventArgs>? AsyncOperationStart;
+        public event EventHandler<EventArgs>? AsyncOperationEnd;
+
         static MyDataObject()
         {
             FileGroupDescriptorId = (short)DataFormats.GetDataFormat("FileGroupDescriptorW").Id;
@@ -184,6 +187,7 @@ namespace DropMultipleFilesComAsyncWpf.Com
         void IDataObjectAsyncCapability.StartOperation(IBindCtx pbcReserved)
         {
             this.isInAsyncOperation = true;
+            this.AsyncOperationStart?.Invoke(this, EventArgs.Empty);
         }
 
         void IDataObjectAsyncCapability.InOperation([Out][MarshalAs(UnmanagedType.Bool)] out bool pfInAsyncOp)
@@ -194,6 +198,7 @@ namespace DropMultipleFilesComAsyncWpf.Com
         void IDataObjectAsyncCapability.EndOperation(int hResult, IBindCtx pbcReserved, DragDropEffects dwEffects)
         {
             this.isInAsyncOperation = false;
+            this.AsyncOperationEnd?.Invoke(this, EventArgs.Empty);
         }
         #endregion IDataObjectAsyncCapability
 

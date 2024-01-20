@@ -17,14 +17,14 @@ namespace DropMultipleFilesComAsyncWpf
             InitializeComponent();
         }
 
-        private void Border_MouseMove(object sender, MouseEventArgs e)
+        private async void Border_MouseMove(object sender, MouseEventArgs e)
         {
             if (!e.LeftButton.HasFlag(MouseButtonState.Pressed))
             {
                 return;
             }
-            var data = this.CreateDataObject();
-            var result = DragDropEx.DoDragDrop(this, data, DragDropEffects.Copy);
+            using var data = this.CreateDataObject();
+            var result = await DragDropEx.DoDragDropAsync(this, data, DragDropEffects.Copy);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -70,7 +70,6 @@ namespace DropMultipleFilesComAsyncWpf
                     return (Stream)lowerContents;
                 },
             });
-            ((IDataObjectAsyncCapability)data).SetAsyncMode(true);
             return data;
         }
 
