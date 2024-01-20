@@ -19,6 +19,7 @@ namespace DropMultipleFilesComWpf
         public void SetFileContents(IList<Stream?> fileContents)
         {
             this.fileContents = fileContents;
+            this.dataObject.SetData("FileContents", 0);
         }
 
         #region System.Windows.IDataObject interfaces
@@ -49,11 +50,6 @@ namespace DropMultipleFilesComWpf
 
         public bool GetDataPresent(string format, bool autoConvert)
         {
-            if (format == "FileContents" &&
-                this.fileContents is not null)
-            {
-                return true;
-            }
             return this.dataObject.GetDataPresent(format, autoConvert);
         }
 
@@ -64,15 +60,7 @@ namespace DropMultipleFilesComWpf
 
         public string[] GetFormats(bool autoConvert)
         {
-            var formats = this.dataObject.GetFormats(autoConvert);
-            if (this.fileContents is not null)
-            {
-                return formats.Concat(new[] { "FileContents" }).ToArray();
-            }
-            else
-            {
-                return formats;
-            }
+            return this.dataObject.GetFormats(autoConvert);
         }
 
         public void SetData(object data)
