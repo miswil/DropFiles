@@ -47,5 +47,15 @@ namespace DropMutipleFilesComAsyncWinForms.Com
                 }
             }
         }
+
+        public static nint GlobalSize(IntPtr hMem)
+        {
+            var size = NativeMethods.GlobalSize(hMem);
+            if (size == 0)
+            {
+                Marshal.ThrowExceptionForHR(Marshal.GetLastPInvokeError());
+            }
+            return size;
+        }
     }
 }

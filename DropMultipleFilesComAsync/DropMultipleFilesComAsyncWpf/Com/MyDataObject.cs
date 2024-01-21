@@ -84,7 +84,45 @@ namespace DropMultipleFilesComAsyncWpf.Com
         public void GetData(ref FORMATETC format, out STGMEDIUM medium)
         {
             medium = new STGMEDIUM();
-            this.GetDataHere(ref format, ref medium);
+            var query = this.QueryGetData(ref format);
+            if (query != NativeMethods.S_OK)
+            {
+                Marshal.ThrowExceptionForHR(query);
+                return;
+            }
+            if (format.cfFormat == FileGroupDescriptorId)
+            {
+                if (this.isAsync)
+                {
+                    if (this.isInAsyncOperation)
+                    {
+                        medium.unionmember =
+                            this.AllocFileGroupDescriptorToHGlobalAsync(IntPtr.Zero).Result;
+                        medium.tymed = TYMED.TYMED_HGLOBAL;
+                    }
+                    else
+                    {
+                        medium.unionmember = IntPtr.Zero;
+                        medium.tymed = TYMED.TYMED_NULL;
+                    }
+                }
+                else
+                {
+                    medium.unionmember =
+                        this.AllocFileGroupDescriptorToHGlobalAsync(IntPtr.Zero).Result;
+                    medium.tymed = TYMED.TYMED_HGLOBAL;
+                }
+            }
+            else if (format.cfFormat == FileContentsId &&
+                this.fcFetches![format.lindex] is not null)
+            {
+                var fcFetch = this.fcFetches![format.lindex];
+                var stream = fcFetch!().Result;
+                var comStream = new ReadStream(stream);
+                this.fetchedStreams.Add(comStream);
+                medium.unionmember = Marshal.GetIUnknownForObject(comStream);
+                medium.tymed = TYMED.TYMED_ISTREAM;
+            }
         }
 
         public void GetDataHere(ref FORMATETC format, ref STGMEDIUM medium)
@@ -102,7 +140,7 @@ namespace DropMultipleFilesComAsyncWpf.Com
                     if (this.isInAsyncOperation)
                     {
                         medium.unionmember =
-                            this.AllocFileGroupDescriptorToHGlobalAsync().Result;
+                            this.AllocFileGroupDescriptorToHGlobalAsync(medium.unionmember).Result;
                         medium.tymed = TYMED.TYMED_HGLOBAL;
                     }
                     else
@@ -114,19 +152,13 @@ namespace DropMultipleFilesComAsyncWpf.Com
                 else
                 {
                     medium.unionmember =
-                        this.AllocFileGroupDescriptorToHGlobalAsync().Result;
+                        this.AllocFileGroupDescriptorToHGlobalAsync(medium.unionmember).Result;
                     medium.tymed = TYMED.TYMED_HGLOBAL;
                 }
             }
-            else if (format.cfFormat == FileContentsId &&
-                this.fcFetches![format.lindex] is not null)
+            else if (format.cfFormat == FileContentsId)
             {
-                var fcFetch = this.fcFetches![format.lindex];
-                var stream = fcFetch!().Result;
-                var comStream = new ReadStream(stream);
-                this.fetchedStreams.Add(comStream);
-                medium.unionmember = Marshal.GetIUnknownForObject(comStream);
-                medium.tymed = TYMED.TYMED_ISTREAM;
+                Marshal.ThrowExceptionForHR(NativeMethods.DV_E_FORMATETC);
             }
         }
 
@@ -201,14 +233,28 @@ namespace DropMultipleFilesComAsyncWpf.Com
         }
         #endregion IDataObjectAsyncCapability
 
-        private async Task<IntPtr> AllocFileGroupDescriptorToHGlobalAsync()
+        private async Task<IntPtr> AllocFileGroupDescriptorToHGlobalAsync(IntPtr specifiedHMem)
         {
             var infos = (await this.fgdFetch!().ConfigureAwait(false)).ToList();
             var fdSize = Marshal.SizeOf<FILEDESCRIPTOR>();
             var fgdSize = Marshal.SizeOf<int>() + fdSize * infos.Count;
-            var handle = SafeNativeMethods.GlobalAlloc(
-                AllocFlag.GMEM_MOVEABLE,
-                (uint)fgdSize);
+
+            IntPtr handle;
+            if (specifiedHMem == IntPtr.Zero)
+            {
+                handle = SafeNativeMethods.GlobalAlloc(
+                    AllocFlag.GMEM_MOVEABLE,
+                    (uint)fgdSize);
+            }
+            else
+            {
+                var size = SafeNativeMethods.GlobalSize(specifiedHMem);
+                if (size < fgdSize) 
+                {
+                    Marshal.ThrowExceptionForHR(NativeMethods.STG_E_MEDIUMFULL);
+                }
+                handle = specifiedHMem;
+            }
             try
             {
                 var ptr = SafeNativeMethods.GlobalLock(handle);

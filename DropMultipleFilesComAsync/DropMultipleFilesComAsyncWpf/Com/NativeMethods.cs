@@ -21,6 +21,9 @@ namespace DropMultipleFilesComAsyncWpf.Com
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool GlobalUnlock(IntPtr hMem);
 
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern nint GlobalSize(IntPtr hMem);
+
         [DllImport("ole32.dll")]
         public static extern int DoDragDrop(
             IComDataObject pDataObject,
@@ -69,5 +72,9 @@ namespace DropMultipleFilesComAsyncWpf.Com
         /// Invalid aspect(s)
         /// </summary>
         public const int DV_E_DVASPECT = unchecked((int)0x8004006B);
+        /// <summary>
+        /// An error occurred when allocating the medium.
+        /// </summary>
+        public const int STG_E_MEDIUMFULL = unchecked((int)0x80030070);
     }
 }
