@@ -130,8 +130,8 @@ namespace DropMutipleFilesComAsyncWinForms.Com
 
         public int QueryGetData(ref FORMATETC format)
         {
-            if (!(format.cfFormat == FileGroupDescriptorId && this.fgdFetch != null ||
-                  format.cfFormat == FileContentsId && this.fcFetches != null))
+            if (!((format.cfFormat == FileGroupDescriptorId && this.fgdFetch != null) ||
+                  (format.cfFormat == FileContentsId && this.fcFetches != null)))
             {
                 return NativeMethods.DV_E_FORMATETC;
             }
