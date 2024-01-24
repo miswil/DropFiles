@@ -6,23 +6,74 @@ namespace DropMultipleFilesComAsyncWpf.Com
 {
     static class NativeMethods
     {
-        [DllImport("kernel32.dll", SetLastError = true)]
-        public static extern IntPtr GlobalAlloc(
+        [DllImport("kernel32.dll", EntryPoint = "GlobalAlloc", SetLastError = true)]
+        private static extern IntPtr UnsafeGlobalAlloc(
             [MarshalAs(UnmanagedType.U4)][In] AllocFlag uFlags,
-            [In] uint dwBytes);
+            [In] nint dwBytes);
 
-        [DllImport("kernel32.dll", SetLastError = true)]
-        public static extern IntPtr GlobalFree(IntPtr hMem);
+        public static IntPtr GlobalAlloc(
+            [MarshalAs(UnmanagedType.U4)][In] AllocFlag uFlags,
+            [In] nint dwBytes)
+        {
+            var handle = NativeMethods.UnsafeGlobalAlloc(uFlags, dwBytes);
+            if (handle == IntPtr.Zero)
+            {
+                Marshal.ThrowExceptionForHR(Marshal.GetLastPInvokeError());
+            }
+            return handle;
+        }
 
-        [DllImport("kernel32.dll", SetLastError = true)]
-        public static extern IntPtr GlobalLock(IntPtr hMem);
+        [DllImport("kernel32.dll", EntryPoint = "GlobalFree", SetLastError = true)]
+        private static extern IntPtr UnsafeGlobalFree(IntPtr hMem);
 
-        [DllImport("kernel32.dll", SetLastError = true)]
+        public static void GlobalFree(IntPtr hMem)
+        {
+            var handle = NativeMethods.UnsafeGlobalFree(hMem);
+            if (handle != IntPtr.Zero)
+            {
+                Marshal.ThrowExceptionForHR(Marshal.GetLastPInvokeError());
+            }
+        }
+
+        [DllImport("kernel32.dll", EntryPoint = "GlobalLock", SetLastError = true)]
+        private static extern IntPtr UnsafeGlobalLock(IntPtr hMem);
+        public static IntPtr GlobalLock(IntPtr hMem)
+        {
+            var handle = NativeMethods.UnsafeGlobalLock(hMem);
+            if (handle == IntPtr.Zero)
+            {
+                Marshal.ThrowExceptionForHR(Marshal.GetLastPInvokeError());
+            }
+            return handle;
+        }
+
+        [DllImport("kernel32.dll", EntryPoint = "GlobalUnlock", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool GlobalUnlock(IntPtr hMem);
+        private static extern bool UnsafeGlobalUnlock(IntPtr hMem);
+        public static void GlobalUnlock(IntPtr hMem)
+        {
+            var stillLocked = NativeMethods.UnsafeGlobalUnlock(hMem);
+            if (!stillLocked)
+            {
+                var lastError = Marshal.GetLastPInvokeError();
+                if (lastError != NativeMethods.NO_ERROR)
+                {
+                    Marshal.ThrowExceptionForHR(lastError);
+                }
+            }
+        }
 
-        [DllImport("kernel32.dll", SetLastError = true)]
-        public static extern nint GlobalSize(IntPtr hMem);
+        [DllImport("kernel32.dll", EntryPoint = "GlobalSize", SetLastError = true)]
+        public static extern nint UnsafeGlobalSize(IntPtr hMem);
+        public static nint GlobalSize(IntPtr hMem)
+        {
+            var size = NativeMethods.UnsafeGlobalSize(hMem);
+            if (size == 0)
+            {
+                Marshal.ThrowExceptionForHR(Marshal.GetLastPInvokeError());
+            }
+            return size;
+        }
 
         [DllImport("ole32.dll")]
         public static extern int DoDragDrop(

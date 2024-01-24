@@ -240,13 +240,13 @@ namespace DropMutipleFilesComAsyncWinForms.Com
             IntPtr handle;
             if (specifiedHMem == IntPtr.Zero)
             {
-                handle = SafeNativeMethods.GlobalAlloc(
+                handle = NativeMethods.GlobalAlloc(
                     AllocFlag.GMEM_MOVEABLE,
-                    (uint)fgdSize);
+                    fgdSize);
             }
             else
             {
-                var size = SafeNativeMethods.GlobalSize(specifiedHMem);
+                var size = NativeMethods.GlobalSize(specifiedHMem);
                 if (size < fgdSize)
                 {
                     Marshal.ThrowExceptionForHR(NativeMethods.STG_E_MEDIUMFULL);
@@ -255,7 +255,7 @@ namespace DropMutipleFilesComAsyncWinForms.Com
             }
             try
             {
-                var ptr = SafeNativeMethods.GlobalLock(handle);
+                var ptr = NativeMethods.GlobalLock(handle);
                 try
                 {
                     Marshal.Copy(BitConverter.GetBytes(infos.Count), 0, ptr, Marshal.SizeOf<int>());
@@ -269,13 +269,13 @@ namespace DropMutipleFilesComAsyncWinForms.Com
                 }
                 finally
                 {
-                    SafeNativeMethods.GlobalUnlock(handle);
+                    NativeMethods.GlobalUnlock(handle);
                 }
                 return handle;
             }
             catch
             {
-                SafeNativeMethods.GlobalFree(handle);
+                NativeMethods.GlobalFree(handle);
                 throw;
             }
         }
