@@ -27,11 +27,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DropMultipleFilesComAsyncWp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DropMultipleFilesComAsyncWinForms", "DropMultipleFilesComAsync\DropMultipleFilesComAsyncWinForms\DropMultipleFilesComAsyncWinForms.csproj", "{404613F0-3D88-4C9F-97F8-6C7BD2CC8B44}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DropMultipleFilesComAsyncIcon", "DropMultipleFilesComAsyncIcon", "{6DE41EB0-E076-4812-A641-DFE902A5E971}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DropMultipleFilesComAsyncDropImage", "DropMultipleFilesComAsyncDropImage", "{6DE41EB0-E076-4812-A641-DFE902A5E971}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropMultipleFilesComAsyncIconWpf", "DropMultipleFilesComAsyncIcon\DropMultipleFilesComAsyncIconWpf\DropMultipleFilesComAsyncIconWpf.csproj", "{70FFBFF9-FD59-4F05-92E1-103993AEED7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropMultipleFilesComAsyncDropImageWpf", "DropMultipleFilesComAsyncDropImage\DropMultipleFilesComAsyncDropImageWpf\DropMultipleFilesComAsyncDropImageWpf.csproj", "{70FFBFF9-FD59-4F05-92E1-103993AEED7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropMultipleFilesComAsyncIconWinForms", "DropMultipleFilesComAsyncIcon\DropMultipleFilesComAsyncIconWinForms\DropMultipleFilesComAsyncIconWinForms.csproj", "{5846095C-352E-48B3-8366-A27A7D5EE567}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropMultipleFilesComAsyncDropImageWinForms", "DropMultipleFilesComAsyncDropImage\DropMultipleFilesComAsyncDropImageWinForms\DropMultipleFilesComAsyncDropImageWinForms.csproj", "{5846095C-352E-48B3-8366-A27A7D5EE567}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
