@@ -3,7 +3,7 @@ using System.Text;
 
 namespace DropMultipleFilesComAsyncIconWinForms
 {
-    public partial class Form1 : Form, IDropSource
+    public partial class Form1 : Form
     {
         public Form1()
         {
@@ -179,26 +179,6 @@ namespace DropMultipleFilesComAsyncIconWinForms
                 e.Effect = DragDropEffects.None;
                 e.DropImageType = DropImageType.None;
             }
-        }
-
-        DropSourceGiveFeedbackResult IDropSource.GiveFeedback(DragDropEffects dwEffect)
-        {
-            return DropSourceGiveFeedbackResult.UseDefaultCursors;
-        }
-
-        DropSourceQueryContinueDragResult IDropSource.QueryContinueDrag(
-            bool fEscapePressed, int grfKeyState)
-        {
-            if (fEscapePressed)
-            {
-                return DropSourceQueryContinueDragResult.Cancel;
-            }
-            if (((grfKeyState & 1) != 1) &&
-                ((grfKeyState & 2) != 2))
-            {
-                return DropSourceQueryContinueDragResult.Drop;
-            }
-            return DropSourceQueryContinueDragResult.Ok;
         }
     }
 }
