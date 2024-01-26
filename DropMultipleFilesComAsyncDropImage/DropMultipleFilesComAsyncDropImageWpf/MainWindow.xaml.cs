@@ -1,5 +1,4 @@
 ﻿using DropMultipleFilesComAsyncIconWpf.Com;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -93,8 +92,16 @@ namespace DropMultipleFilesComAsyncIconWpf
 
         DropSourceGiveFeedbackResult IDropSource.GiveFeedback(DragDropEffects dwEffect)
         {
-            this.currentData!.UpdateDragImage();
-            return DropSourceGiveFeedbackResult.Ok;
+            if (this.currentData!.IsShowingLayered())
+            {
+                this.currentData!.UpdateDragImage();
+                Mouse.SetCursor(Cursors.Arrow);
+                return DropSourceGiveFeedbackResult.Ok;
+            }
+            else
+            {
+                return DropSourceGiveFeedbackResult.UseDefaultCursors;
+            }
         }
 
         DropSourceQueryContinueDragResult IDropSource.QueryContinueDrag(

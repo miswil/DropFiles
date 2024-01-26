@@ -118,5 +118,36 @@ namespace DropMultipleFilesComAsyncIconWpf.Com
                 NativeMethods.ReleaseStgMedium(ref medium);
             }
         }
+
+        public static bool IsShowingLayered(
+            this IComDataObject comDataObject)
+        {
+            var format = new FORMATETC
+            {
+                cfFormat = (short)DataFormats.GetDataFormat("IsShowingLayered").Id,
+                dwAspect = DVASPECT.DVASPECT_CONTENT,
+                lindex = -1,
+                tymed = TYMED.TYMED_HGLOBAL,
+            };
+            comDataObject.GetData(ref format, out var medium);
+            try
+            {
+                var hMem = medium.unionmember;
+                var ptr = NativeMethods.GlobalLock(hMem);
+                try
+                {
+                    var isShowingLayered = Marshal.PtrToStructure<int>(ptr);
+                    return isShowingLayered != 0;
+                }
+                finally
+                {
+                    NativeMethods.GlobalUnlock(hMem);
+                }
+            }
+            finally
+            {
+                NativeMethods.ReleaseStgMedium(ref medium);
+            }
+        }
     }
 }
