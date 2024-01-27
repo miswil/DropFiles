@@ -1,7 +1,4 @@
-﻿using System.Collections.Frozen;
-using System.Diagnostics;
-using System.IO;
-using System.Runtime.CompilerServices;
+﻿using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Windows;
@@ -10,13 +7,14 @@ using IComDataObject = System.Runtime.InteropServices.ComTypes.IDataObject;
 
 namespace DropMultipleFilesComAsyncIconWpf.Com
 {
-    class MyDataObject : IComDataObject, IDataObjectAsyncCapability, IDisposable
+    sealed class MyDataObject : IComDataObject, IDataObjectAsyncCapability, IDisposable
     {
         private static readonly List<FORMATETC> StaticFileFormats;
 
         private static readonly short FileGroupDescriptorId;
         private static readonly short FileContentsId;
 
+        private bool isDisposed;
         private List<(FORMATETC format, STGMEDIUM medium)> data = new();
         private Func<Task<IEnumerable<IDroppedObjectInfo>>>? fgdFetch;
         private IList<Func<Task<Stream>>?>? fcFetches;
@@ -333,14 +331,28 @@ namespace DropMultipleFilesComAsyncIconWpf.Com
 
         public void Dispose()
         {
+            this.Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~MyDataObject()
+        {
+            this.Dispose(disposing: false);
+        }
+
+        private void Dispose(bool disposing)
+        {
             foreach (var d in this.data)
             {
                 var medium = d.medium;
                 NativeMethods.ReleaseStgMedium(ref medium);
             }
-            foreach (var fetchedStream in this.fetchedContents)
+            if (disposing)
             {
-                fetchedStream.Dispose();
+                foreach (var fetchedStream in this.fetchedContents)
+                {
+                    fetchedStream.Dispose();
+                }
             }
         }
 
