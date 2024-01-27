@@ -129,6 +129,10 @@ namespace DropMultipleFilesComAsyncIconWpf.Com
                 lindex = -1,
                 tymed = TYMED.TYMED_HGLOBAL,
             };
+            if (NativeMethods.S_OK != comDataObject.QueryGetData(ref format))
+            {
+                return false;
+            }
             comDataObject.GetData(ref format, out var medium);
             try
             {
