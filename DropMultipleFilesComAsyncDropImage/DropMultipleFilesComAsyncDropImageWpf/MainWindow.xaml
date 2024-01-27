@@ -7,11 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         AllowDrop="True"
-        PreviewDragEnter="Window_PreviewDragEnter"
         DragEnter="Window_DragEnter"
-        PreviewDragOver="Window_PreviewDragOver"
         DragOver="Window_DragOver"
-        PreviewDragLeave="Window_PreviewDragLeave"
         DragLeave="Window_DragLeave"
         Drop="Window_Drop">
     <Grid>

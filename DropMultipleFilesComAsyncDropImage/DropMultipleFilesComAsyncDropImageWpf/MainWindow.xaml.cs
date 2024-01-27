@@ -119,18 +119,6 @@ namespace DropMultipleFilesComAsyncIconWpf
             return DropSourceQueryContinueDragResult.Ok;
         }
 
-        private void Window_PreviewDragEnter(object sender, DragEventArgs e)
-        {
-        }
-
-        private void Window_PreviewDragOver(object sender, DragEventArgs e)
-        {
-        }
-
-        private void Window_PreviewDragLeave(object sender, DragEventArgs e)
-        {
-        }
-
         private void Window_Drop(object sender, DragEventArgs e)
         {
             if (e.Data is IComDataObject comData)
