@@ -342,6 +342,7 @@ namespace DropMultipleFilesComAsyncDragImageWpf.Com
 
         private void Dispose(bool disposing)
         {
+            if (this.isDisposed) { return; }
             foreach (var d in this.data)
             {
                 var medium = d.medium;
@@ -354,6 +355,7 @@ namespace DropMultipleFilesComAsyncDragImageWpf.Com
                     fetchedStream.Dispose();
                 }
             }
+            this.isDisposed = true;
         }
 
         private class EnumDropFileFormat : IEnumFORMATETC
