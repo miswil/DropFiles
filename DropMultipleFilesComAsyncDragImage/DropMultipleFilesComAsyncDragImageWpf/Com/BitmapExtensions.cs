@@ -10,6 +10,13 @@ namespace DropMultipleFilesComAsyncDragImageWpf.Com
 {
     internal static class BitmapExtensions
     {
+        public static void ForceRender(this UIElement ui, double width, double height)
+        {
+            ui.Measure(new System.Windows.Size(width, height));
+            ui.Arrange(new Rect(0, 0, width, height));
+            ui.UpdateLayout();
+        }
+
         public static Bitmap ToBitmap(this UIElement ui)
         {
             var w = ui.RenderSize.Width;

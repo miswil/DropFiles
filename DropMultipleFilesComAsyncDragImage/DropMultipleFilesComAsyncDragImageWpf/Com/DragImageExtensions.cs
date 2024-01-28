@@ -13,14 +13,21 @@ namespace DropMultipleFilesComAsyncDragImageWpf.Com
             UIElement ui)
         {
             var bmp = ui.ToBitmap();
-            var hbitmap = bmp.GetHbitmap();
+            dataObject.SetDragImage(bmp);
+        }
+
+        public static void SetDragImage(
+            this IComDataObject dataObject,
+            Bitmap bitmap)
+        {
+            var hbitmap = bitmap.GetHbitmap();
             try
             {
                 var dragImage = new ShDragImage
                 {
                     hbmpDragImage = hbitmap,
-                    ptOffset = new Win32Point { x = 0, y = bmp.Height },
-                    sizeDragImage = new Win32Size { cx = bmp.Width, cy = bmp.Height },
+                    ptOffset = new Win32Point { x = 0, y = bitmap.Height },
+                    sizeDragImage = new Win32Size { cx = bitmap.Width, cy = bitmap.Height },
                     crColorKey = Color.White.ToArgb()
                 };
                 var helper = (IDragSourceHelper2)new DragDropHelper();
