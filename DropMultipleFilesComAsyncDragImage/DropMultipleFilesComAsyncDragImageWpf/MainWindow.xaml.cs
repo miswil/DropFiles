@@ -46,6 +46,7 @@ namespace DropMultipleFilesComAsyncDragImageWpf
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var data = this.CreateDataObject();
+            ((IDataObjectAsyncCapability)data).SetAsyncMode(true);
             Clipboard.SetDataObject(data);
         }
 
