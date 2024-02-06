@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Diagnostics;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Windows;
@@ -135,26 +136,41 @@ namespace DropMultipleFilesComAsyncDragImageWpf.Com
         public static bool IsShowingLayered(
             this IComDataObject comDataObject)
         {
-            var format = new FORMATETC
+            return comDataObject.GetBoolean("IsShowingLayered");
+        }
+
+        public static bool IsShowingText(
+            this IComDataObject comDataObject)
+        {
+            var ret = comDataObject.GetBoolean("IsShowingText");
+            Debug.WriteLine(ret);
+            return ret;
+        }
+
+        public static bool GetBoolean(
+            this IComDataObject comDataObject,
+            string format)
+        {
+            var formatetc = new FORMATETC
             {
-                cfFormat = (short)DataFormats.GetDataFormat("IsShowingLayered").Id,
+                cfFormat = (short)DataFormats.GetDataFormat(format).Id,
                 dwAspect = DVASPECT.DVASPECT_CONTENT,
                 lindex = -1,
                 tymed = TYMED.TYMED_HGLOBAL,
             };
-            if (NativeMethods.S_OK != comDataObject.QueryGetData(ref format))
+            if (NativeMethods.S_OK != comDataObject.QueryGetData(ref formatetc))
             {
                 return false;
             }
-            comDataObject.GetData(ref format, out var medium);
+            comDataObject.GetData(ref formatetc, out var medium);
             try
             {
                 var hMem = medium.unionmember;
                 var ptr = NativeMethods.GlobalLock(hMem);
                 try
                 {
-                    var isShowingLayered = Marshal.PtrToStructure<int>(ptr);
-                    return isShowingLayered != 0;
+                    var value = Marshal.PtrToStructure<int>(ptr);
+                    return value != 0;
                 }
                 finally
                 {

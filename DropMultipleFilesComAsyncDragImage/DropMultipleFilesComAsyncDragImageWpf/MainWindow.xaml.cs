@@ -95,7 +95,8 @@ namespace DropMultipleFilesComAsyncDragImageWpf
 
         DropSourceGiveFeedbackResult IDropSource.GiveFeedback(DragDropEffects dwEffect)
         {
-            if (this.currentData!.IsShowingLayered())
+            if (this.currentData!.IsShowingLayered() && 
+                this.currentData!.IsShowingText())
             {
                 this.currentData!.UpdateDragImage();
                 Mouse.SetCursor(Cursors.Arrow);
