@@ -167,11 +167,7 @@ namespace DropMultipleFilesComAsyncDragImageWpf.Com
             }
             else
             {
-                var hr = foundMedium.CopyTo(format.tymed, ref medium);
-                if (hr != NativeMethods.S_OK)
-                {
-                    Marshal.ThrowExceptionForHR(hr);
-                }
+                foundMedium.CopyTo(format.cfFormat, ref medium);
             }
         }
 

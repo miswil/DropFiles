@@ -86,12 +86,13 @@ namespace DropMultipleFilesComAsyncDragImageWpf.Com
             [Out][MarshalAs(UnmanagedType.I4)] out DragDropEffects pdwEffect);
 
         [DllImport("ole32.dll")]
-        public static extern void ReleaseStgMedium(ref STGMEDIUM pmedium);
+        public static extern IntPtr OleDuplicateData(
+            [In] IntPtr hSrc,
+            [In] long cfFormat,
+            [MarshalAs(UnmanagedType.U4)][In] AllocFlag uiFlags);
 
-        [DllImport("Shlwapi.dll")]
-        public static extern IStream SHCreateMemStream(
-            [In][MarshalAs(UnmanagedType.LPArray)] byte[]? init,
-            [In] uint cbInit);
+        [DllImport("ole32.dll")]
+        public static extern void ReleaseStgMedium(ref STGMEDIUM pmedium);
 
         [DllImport("gdiplus.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
