@@ -8,6 +8,7 @@ namespace DropMultipleFilesComAsyncDragImageWinForms.Com
 {
     class MyDataObject : IComDataObject, IDataObjectAsyncCapability, IDisposable
     {
+        private static List<FORMATETC> staticFileFormats;
         private static readonly short FileGroupDescriptorId;
         private static readonly short FileContentsId;
 
@@ -25,6 +26,25 @@ namespace DropMultipleFilesComAsyncDragImageWinForms.Com
         {
             FileGroupDescriptorId = (short)DataFormats.GetFormat("FileGroupDescriptorW").Id;
             FileContentsId = (short)DataFormats.GetFormat("FileContents").Id;
+            staticFileFormats =
+            [
+                new FORMATETC
+                {
+                    cfFormat = FileGroupDescriptorId,
+                    dwAspect = DVASPECT.DVASPECT_CONTENT,
+                    lindex = -1,
+                    ptd = nint.Zero,
+                    tymed = TYMED.TYMED_HGLOBAL,
+                },
+                new FORMATETC
+                {
+                    cfFormat = FileContentsId,
+                    dwAspect = DVASPECT.DVASPECT_CONTENT,
+                    lindex = -1,
+                    ptd = nint.Zero,
+                    tymed = TYMED.TYMED_ISTREAM,
+                },
+            ];
         }
 
         public MyDataObject()
@@ -69,8 +89,21 @@ namespace DropMultipleFilesComAsyncDragImageWinForms.Com
         {
             if (direction == DATADIR.DATADIR_GET)
             {
-                var formats = ((IComDataObject)this.dataObject).EnumFormatEtc(direction);
-                return new EnumDropFileFormat(formats);
+                var enumFormats = ((IComDataObject)this.dataObject).EnumFormatEtc(direction);
+                var formatList = new List<FORMATETC>();
+                var formatAry = new FORMATETC[1];
+                var fetchedAry = new int[1];
+                do
+                {
+                    enumFormats.Next(1, formatAry, fetchedAry);
+                    formatList.Add(formatAry[0]);
+                } while (fetchedAry[0] != 0);
+                formatList.AddRange(staticFileFormats);
+                NativeMethods.CreateFormatEnumerator(
+                    (uint)formatList.Count,
+                    formatList.ToArray(),
+                    out var enumFormatEtc);
+                return enumFormatEtc;
             }
             if (direction == DATADIR.DATADIR_SET)
             {
@@ -298,91 +331,6 @@ namespace DropMultipleFilesComAsyncDragImageWinForms.Com
             foreach (var fetchedStream in this.fetchedStreams)
             {
                 fetchedStream.Dispose();
-            }
-        }
-
-        private class EnumDropFileFormat : IEnumFORMATETC
-        {
-            private static List<FORMATETC> staticFileFormats =
-                [
-                    new FORMATETC
-                    {
-                        cfFormat = FileGroupDescriptorId,
-                        dwAspect = DVASPECT.DVASPECT_CONTENT,
-                        lindex = -1,
-                        ptd = nint.Zero,
-                        tymed = TYMED.TYMED_HGLOBAL,
-                    },
-                    new FORMATETC
-                    {
-                        cfFormat = FileContentsId,
-                        dwAspect = DVASPECT.DVASPECT_CONTENT,
-                        lindex = -1,
-                        ptd = nint.Zero,
-                        tymed = TYMED.TYMED_ISTREAM,
-                    },
-                ];
-
-            private readonly IEnumFORMATETC dynamicFormats;
-            private int index;
-
-            public EnumDropFileFormat(IEnumFORMATETC formats)
-            {
-                this.dynamicFormats = formats;
-            }
-
-            public void Clone(out IEnumFORMATETC newEnum)
-            {
-                this.dynamicFormats.Clone(out var clone);
-                var enumDropFileFormat = new EnumDropFileFormat(clone);
-                enumDropFileFormat.index = this.index;
-                newEnum = enumDropFileFormat;
-            }
-
-            public int Next(int celt, FORMATETC[] rgelt, int[] pceltFetched)
-            {
-                var dynamicFetched = new int[1];
-                var dynamicResult = this.dynamicFormats.Next(celt, rgelt, dynamicFetched);
-
-                FORMATETC[] staticRgelt = new FORMATETC[celt - dynamicFetched[0]];
-                int celtFetched = 0;
-                for (;
-                    this.index < staticFileFormats.Count && celtFetched < celt - dynamicFetched[0] && celtFetched < rgelt.Length;
-                    ++celtFetched, ++this.index)
-                {
-                    staticRgelt[celtFetched] = staticFileFormats[this.index];
-                }
-                for (int i = dynamicFetched[0]; i < celt; ++i)
-                {
-                    rgelt[i] = staticRgelt[i - dynamicFetched[0]];
-                }
-
-                if (pceltFetched?.Length > 0)
-                {
-                    pceltFetched[0] = dynamicFetched[0] + celtFetched;
-                }
-
-                return celt - dynamicFetched[0] == celtFetched ? NativeMethods.S_OK : NativeMethods.S_FALSE;
-            }
-
-            public int Reset()
-            {
-                this.index = 0;
-                return NativeMethods.S_OK;
-            }
-
-            public int Skip(int celt)
-            {
-                if (this.index + celt < staticFileFormats.Count)
-                {
-                    this.index += celt;
-                    return NativeMethods.S_OK;
-                }
-                else
-                {
-                    this.index = staticFileFormats.Count;
-                    return NativeMethods.S_FALSE;
-                }
             }
         }
     }

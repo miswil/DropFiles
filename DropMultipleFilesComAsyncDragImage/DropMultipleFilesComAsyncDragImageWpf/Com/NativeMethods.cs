@@ -94,6 +94,12 @@ namespace DropMultipleFilesComAsyncDragImageWpf.Com
         [DllImport("ole32.dll")]
         public static extern void ReleaseStgMedium(ref STGMEDIUM pmedium);
 
+        [DllImport("Urlmon.dll", PreserveSig = false)]
+        public static extern void CreateFormatEnumerator(
+            [In] uint cfmtetc,
+            [In] FORMATETC[] rgfmtetc,
+            [Out] out IEnumFORMATETC enumfmtetc);
+
         [DllImport("gdiplus.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool DeleteObject(IntPtr hgdi);

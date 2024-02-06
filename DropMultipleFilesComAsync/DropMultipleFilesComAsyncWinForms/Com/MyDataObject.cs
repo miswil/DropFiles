@@ -7,6 +7,7 @@ namespace DropMutipleFilesComAsyncWinForms.Com
 {
     class MyDataObject : IComDataObject, IDataObjectAsyncCapability, IDisposable
     {
+        private static List<FORMATETC> StaticFileFormats;
         private static readonly short FileGroupDescriptorId;
         private static readonly short FileContentsId;
 
@@ -23,6 +24,25 @@ namespace DropMutipleFilesComAsyncWinForms.Com
         {
             FileGroupDescriptorId = (short)DataFormats.GetFormat("FileGroupDescriptorW").Id;
             FileContentsId = (short)DataFormats.GetFormat("FileContents").Id;
+            StaticFileFormats =
+            [
+                new FORMATETC
+                {
+                    cfFormat = FileGroupDescriptorId,
+                    dwAspect = DVASPECT.DVASPECT_CONTENT,
+                    lindex = -1,
+                    ptd = nint.Zero,
+                    tymed = TYMED.TYMED_HGLOBAL,
+                },
+                new FORMATETC
+                {
+                    cfFormat = FileContentsId,
+                    dwAspect = DVASPECT.DVASPECT_CONTENT,
+                    lindex = -1,
+                    ptd = nint.Zero,
+                    tymed = TYMED.TYMED_ISTREAM,
+                },
+            ];
         }
 
         public void SetFileGroupDescriptorFetch(
@@ -64,7 +84,11 @@ namespace DropMutipleFilesComAsyncWinForms.Com
         {
             if (direction == DATADIR.DATADIR_GET)
             {
-                return new EnumDropFileFormat();
+                NativeMethods.CreateFormatEnumerator(
+                    2u,
+                    StaticFileFormats.ToArray(),
+                    out var enumFmtEtc);
+                return enumFmtEtc;
             }
             if (direction == DATADIR.DATADIR_SET)
             {
@@ -285,75 +309,6 @@ namespace DropMutipleFilesComAsyncWinForms.Com
             foreach (var fetchedStream in this.fetchedStreams)
             {
                 fetchedStream.Dispose();
-            }
-        }
-
-        private class EnumDropFileFormat : IEnumFORMATETC
-        {
-            private static List<FORMATETC> staticFileFormats =
-                [
-                    new FORMATETC
-                    {
-                        cfFormat = FileGroupDescriptorId,
-                        dwAspect = DVASPECT.DVASPECT_CONTENT,
-                        lindex = -1,
-                        ptd = nint.Zero,
-                        tymed = TYMED.TYMED_HGLOBAL,
-                    },
-                    new FORMATETC
-                    {
-                        cfFormat = FileContentsId,
-                        dwAspect = DVASPECT.DVASPECT_CONTENT,
-                        lindex = -1,
-                        ptd = nint.Zero,
-                        tymed = TYMED.TYMED_ISTREAM,
-                    },
-                ];
-
-            private int index;
-
-            public void Clone(out IEnumFORMATETC newEnum)
-            {
-                var enumDropFileFormat = new EnumDropFileFormat();
-                enumDropFileFormat.index = this.index;
-                newEnum = enumDropFileFormat;
-            }
-
-            public int Next(int celt, FORMATETC[] rgelt, int[] pceltFetched)
-            {
-                int celtFetched = 0;
-                for (;
-                    this.index < staticFileFormats.Count && celtFetched < celt && celtFetched < rgelt.Length;
-                    ++celtFetched, ++this.index)
-                {
-                    rgelt[celtFetched] = staticFileFormats[this.index];
-                }
-                if (pceltFetched?.Length > 0)
-                {
-                    pceltFetched[0] = celtFetched;
-                }
-
-                return celt == celtFetched ? NativeMethods.S_OK : NativeMethods.S_FALSE;
-            }
-
-            public int Reset()
-            {
-                this.index = 0;
-                return NativeMethods.S_OK;
-            }
-
-            public int Skip(int celt)
-            {
-                if (this.index + celt < staticFileFormats.Count)
-                {
-                    this.index += celt;
-                    return NativeMethods.S_OK;
-                }
-                else
-                {
-                    this.index = staticFileFormats.Count;
-                    return NativeMethods.S_FALSE;
-                }
             }
         }
     }

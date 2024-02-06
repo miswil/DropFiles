@@ -89,7 +89,13 @@ namespace DropMultipleFilesComAsyncDragImageWpf.Com
         {
             if (direction == DATADIR.DATADIR_GET)
             {
-                return new EnumDropFileFormat(this.data.Select(d => d.format).ToList());
+                var formats = this.data.Select(d => d.format)
+                    .Concat(StaticFileFormats).ToArray();
+                NativeMethods.CreateFormatEnumerator(
+                    (uint)formats.Length,
+                    formats,
+                    out var enumFmtEtc);
+                return enumFmtEtc;
             }
             if (direction == DATADIR.DATADIR_SET)
             {
@@ -352,63 +358,6 @@ namespace DropMultipleFilesComAsyncDragImageWpf.Com
                 }
             }
             this.isDisposed = true;
-        }
-
-        private class EnumDropFileFormat : IEnumFORMATETC
-        {
-            private int index;
-            private List<FORMATETC> formats;
-
-            public EnumDropFileFormat(List<FORMATETC> formats)
-            {
-                this.formats = formats;
-            }
-
-            public void Clone(out IEnumFORMATETC newEnum)
-            {
-                var enumDropFileFormat = new EnumDropFileFormat(this.formats);
-                enumDropFileFormat.index = this.index;
-                newEnum = enumDropFileFormat;
-            }
-
-            public int Next(int celt, FORMATETC[] rgelt, int[] pceltFetched)
-            {
-                int celtFetched = 0;
-                var allFormats = this.formats.Concat(StaticFileFormats).ToList();
-                for (;
-                    this.index < allFormats.Count && celtFetched < celt && celtFetched < rgelt.Length;
-                    ++celtFetched, ++this.index)
-                {
-                    rgelt[celtFetched] = allFormats[this.index];
-                }
-                if (pceltFetched?.Length > 0)
-                {
-                    pceltFetched[0] = celtFetched;
-                }
-
-                return celt == celtFetched ? NativeMethods.S_OK : NativeMethods.S_FALSE;
-            }
-
-            public int Reset()
-            {
-                this.index = 0;
-                return NativeMethods.S_OK;
-            }
-
-            public int Skip(int celt)
-            {
-                var nFormats = StaticFileFormats.Count + this.formats.Count;
-                if (this.index + celt < nFormats)
-                {
-                    this.index += celt;
-                    return NativeMethods.S_OK;
-                }
-                else
-                {
-                    this.index = nFormats;
-                    return NativeMethods.S_FALSE;
-                }
-            }
         }
     }
 }

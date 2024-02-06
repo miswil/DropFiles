@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 using IComDataObject = System.Runtime.InteropServices.ComTypes.IDataObject;
 
 namespace DropMultipleFilesComAsyncDragImageWinForms.Com
@@ -80,6 +81,12 @@ namespace DropMultipleFilesComAsyncDragImageWinForms.Com
             IDropSource pDropSource,
             [MarshalAs(UnmanagedType.I4)] DragDropEffects dwOKEffect,
             [Out][MarshalAs(UnmanagedType.I4)] out DragDropEffects pdwEffect);
+
+        [DllImport("Urlmon.dll", PreserveSig = false)]
+        public static extern void CreateFormatEnumerator(
+        [In] uint cfmtetc,
+            [In] FORMATETC[] rgfmtetc,
+            [Out] out IEnumFORMATETC enumfmtetc);
 
         public const int NO_ERROR = 0;
         /// <summary>
