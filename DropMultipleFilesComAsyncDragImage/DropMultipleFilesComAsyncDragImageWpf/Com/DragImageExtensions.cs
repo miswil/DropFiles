@@ -10,15 +10,17 @@ namespace DropMultipleFilesComAsyncDragImageWpf.Com
     {
         public static void SetDragImage(
             this IComDataObject dataObject,
-            UIElement ui)
+            UIElement ui,
+            bool useDefaultDragImage = false)
         {
             var bmp = ui.ToBitmap();
-            dataObject.SetDragImage(bmp);
+            dataObject.SetDragImage(bmp, useDefaultDragImage);
         }
 
         public static void SetDragImage(
             this IComDataObject dataObject,
-            Bitmap bitmap)
+            Bitmap bitmap,
+            bool useDefaultDragImage = false)
         {
             var hbitmap = bitmap.GetHbitmap();
             try
@@ -33,6 +35,10 @@ namespace DropMultipleFilesComAsyncDragImageWpf.Com
                 var helper = (IDragSourceHelper2)new DragDropHelper();
                 helper.SetFlags(DSH_FLAGS.DSH_ALLOWDROPDESCRIPTIONTEXT);
                 helper.InitializeFromBitmap(ref dragImage, dataObject);
+                if (useDefaultDragImage)
+                {
+                    dataObject.SetBoolean("UsingDefaultDragImage", true);
+                }
             }
             catch
             {
@@ -158,6 +164,47 @@ namespace DropMultipleFilesComAsyncDragImageWpf.Com
             finally
             {
                 NativeMethods.ReleaseStgMedium(ref medium);
+            }
+        }
+
+        public static void SetBoolean(
+            this IComDataObject comDataObject,
+            string format,
+            bool value)
+        {
+            var size = Marshal.SizeOf<int>();
+            var hMem = NativeMethods.GlobalAlloc(AllocFlag.GMEM_MOVEABLE, size);
+            try
+            {
+                var formatetc = new FORMATETC
+                {
+                    cfFormat = (short)DataFormats.GetDataFormat(format).Id,
+                    lindex = -1,
+                    dwAspect = DVASPECT.DVASPECT_CONTENT,
+                    tymed = TYMED.TYMED_HGLOBAL,
+                    ptd = IntPtr.Zero,
+                };
+                var ptr = NativeMethods.GlobalLock(hMem);
+                try
+                {
+                    var boolValue = value ? 1 : 0;
+                    Marshal.StructureToPtr(boolValue, ptr, false);
+                }
+                finally
+                {
+                    NativeMethods.GlobalUnlock(hMem);
+                }
+                var medium = new STGMEDIUM
+                {
+                    tymed = TYMED.TYMED_HGLOBAL,
+                    unionmember = hMem
+                };
+                comDataObject.SetData(ref formatetc, ref medium, true);
+            }
+            catch
+            {
+                NativeMethods.GlobalFree(hMem);
+                throw;
             }
         }
     }

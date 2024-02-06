@@ -89,7 +89,7 @@ namespace DropMultipleFilesComAsyncDragImageWpf
             });
             var dragImage = new UserControl1();
             dragImage.ForceRender(dragImage.Width, dragImage.Height);
-            data.SetDragImage(dragImage);
+            data.SetDragImage(dragImage, true);
             return data;
         }
 
