@@ -29,7 +29,7 @@ namespace DropMultipleFilesComAsyncDragImageWpf.Com
                             src.unionmember,
                             cfFormat,
                             AllocFlag.GMEM_MOVEABLE);
-                    dest.tymed = TYMED.TYMED_HGLOBAL;
+                    dest.tymed = src.tymed;
                     return NativeMethods.S_OK;
             }
         }
