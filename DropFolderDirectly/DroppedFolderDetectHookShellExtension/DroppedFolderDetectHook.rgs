@@ -1,0 +1,15 @@
+HKCR
+{
+	NoRemove CLSID
+	{
+		ForceRemove {748c00ab-b809-4dd0-a2c4-9b954e9ee6d2} = s 'DroppedFolderDetectHook class'
+		{
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			TypeLib = s '{300d1fde-9a07-468c-bbc5-37cd2466adc0}'
+			Version = s '1.0'
+		}
+	}
+}

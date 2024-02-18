@@ -8,11 +8,27 @@ import "oaidl.idl";
 import "ocidl.idl";
 
 [
+	object,
+	uuid(46ee4e3f-0b00-4310-9100-e443d0d5d551),
+	pointer_default(unique)
+]
+interface IDroppedFolderDetectHook : IUnknown
+{
+};
+[
 	uuid(300d1fde-9a07-468c-bbc5-37cd2466adc0),
 	version(1.0),
 ]
 library DroppedFolderDetectHookShellExtensionLib
 {
 	importlib("stdole2.tlb");
+	[
+		uuid(748c00ab-b809-4dd0-a2c4-9b954e9ee6d2)
+	]
+	coclass DroppedFolderDetectHook
+	{
+		[default] interface IDroppedFolderDetectHook;
+	};
 };
 
+import "shobjidl.idl";
