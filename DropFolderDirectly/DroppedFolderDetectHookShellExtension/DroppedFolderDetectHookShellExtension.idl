@@ -1,0 +1,18 @@
+﻿// DroppedFolderDetectHookShellExtension.idl : DroppedFolderDetectHookShellExtension の IDL ソース
+//
+
+// このファイルは、タイプ ライブラリ ([!output SAFE_IDL_NAME].tlb) およびマーシャリング コードを
+// タイプ ライブラリ (DroppedFolderDetectHookShellExtension.tlb) とマーシャリング コードを生成します。
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(300d1fde-9a07-468c-bbc5-37cd2466adc0),
+	version(1.0),
+]
+library DroppedFolderDetectHookShellExtensionLib
+{
+	importlib("stdole2.tlb");
+};
+
