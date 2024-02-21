@@ -37,7 +37,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DropDirectly", "DropDirectl
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DroppedFolderDetectHookShellExtension", "DropDirectly\DroppedFolderDetectHookShellExtension\DroppedFolderDetectHookShellExtension.vcxproj", "{FCFF7DF1-3FF1-419C-BF93-9542E228B306}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropDirectlyWpf", "DropDirectly\DropDirectlyWpf\DropDirectlyWpf.csproj", "{DDAFF459-67D8-4F7A-8FB0-F99A85F71017}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DropDirectlyWpf", "DropDirectly\DropDirectlyWpf\DropDirectlyWpf.csproj", "{DDAFF459-67D8-4F7A-8FB0-F99A85F71017}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropDirectlyWinForms", "DropDirectly\DropDirectlyWinForms\DropDirectlyWinForms.csproj", "{06311897-5C45-4EB6-8611-2D8A26575E43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -193,6 +195,18 @@ Global
 		{DDAFF459-67D8-4F7A-8FB0-F99A85F71017}.Release|x64.Build.0 = Release|Any CPU
 		{DDAFF459-67D8-4F7A-8FB0-F99A85F71017}.Release|x86.ActiveCfg = Release|Any CPU
 		{DDAFF459-67D8-4F7A-8FB0-F99A85F71017}.Release|x86.Build.0 = Release|Any CPU
+		{06311897-5C45-4EB6-8611-2D8A26575E43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06311897-5C45-4EB6-8611-2D8A26575E43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06311897-5C45-4EB6-8611-2D8A26575E43}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{06311897-5C45-4EB6-8611-2D8A26575E43}.Debug|x64.Build.0 = Debug|Any CPU
+		{06311897-5C45-4EB6-8611-2D8A26575E43}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{06311897-5C45-4EB6-8611-2D8A26575E43}.Debug|x86.Build.0 = Debug|Any CPU
+		{06311897-5C45-4EB6-8611-2D8A26575E43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06311897-5C45-4EB6-8611-2D8A26575E43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06311897-5C45-4EB6-8611-2D8A26575E43}.Release|x64.ActiveCfg = Release|Any CPU
+		{06311897-5C45-4EB6-8611-2D8A26575E43}.Release|x64.Build.0 = Release|Any CPU
+		{06311897-5C45-4EB6-8611-2D8A26575E43}.Release|x86.ActiveCfg = Release|Any CPU
+		{06311897-5C45-4EB6-8611-2D8A26575E43}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -210,6 +224,7 @@ Global
 		{5846095C-352E-48B3-8366-A27A7D5EE567} = {6DE41EB0-E076-4812-A641-DFE902A5E971}
 		{FCFF7DF1-3FF1-419C-BF93-9542E228B306} = {65CC6416-BAD3-4D6D-AA38-2860AD220120}
 		{DDAFF459-67D8-4F7A-8FB0-F99A85F71017} = {65CC6416-BAD3-4D6D-AA38-2860AD220120}
+		{06311897-5C45-4EB6-8611-2D8A26575E43} = {65CC6416-BAD3-4D6D-AA38-2860AD220120}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {555731B5-9D78-4ECB-81FA-420E09D891C7}
