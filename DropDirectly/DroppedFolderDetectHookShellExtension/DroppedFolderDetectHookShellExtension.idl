@@ -8,14 +8,6 @@ import "oaidl.idl";
 import "ocidl.idl";
 
 [
-	object,
-	uuid(46ee4e3f-0b00-4310-9100-e443d0d5d551),
-	pointer_default(unique)
-]
-interface IDroppedFolderDetectHook : IUnknown
-{
-};
-[
 	uuid(300d1fde-9a07-468c-bbc5-37cd2466adc0),
 	version(1.0),
 ]
@@ -27,7 +19,7 @@ library DroppedFolderDetectHookShellExtensionLib
 	]
 	coclass DroppedFolderDetectHook
 	{
-		[default] interface IDroppedFolderDetectHook;
+		[default] interface IUnknown;
 	};
 };
 

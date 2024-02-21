@@ -21,7 +21,7 @@ using namespace ATL;
 class ATL_NO_VTABLE CDroppedFolderDetectHook :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CDroppedFolderDetectHook, &CLSID_DroppedFolderDetectHook>,
-	public IDroppedFolderDetectHook
+	public ICopyHook
 {
 public:
 	CDroppedFolderDetectHook()
@@ -33,7 +33,7 @@ DECLARE_REGISTRY_RESOURCEID(106)
 DECLARE_NOT_AGGREGATABLE(CDroppedFolderDetectHook)
 
 BEGIN_COM_MAP(CDroppedFolderDetectHook)
-	COM_INTERFACE_ENTRY(IDroppedFolderDetectHook)
+	COM_INTERFACE_ENTRY_IID(IID_IShellCopyHook, ICopyHook)
 END_COM_MAP()
 
 
@@ -51,8 +51,10 @@ END_COM_MAP()
 
 public:
 
-
-
+	UINT CopyCallback(
+		HWND hwnd, UINT wFunc, UINT wFlags,
+		PCWSTR pszSrcFile, DWORD dwSrcAttribs,
+		PCWSTR pszDestFile, DWORD dwDestAttribs) override;
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(DroppedFolderDetectHook), CDroppedFolderDetectHook)

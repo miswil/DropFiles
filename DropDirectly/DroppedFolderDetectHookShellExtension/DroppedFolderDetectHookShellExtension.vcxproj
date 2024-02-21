@@ -266,12 +266,16 @@
     <ResourceCompile Include="DroppedFolderDetectHookShellExtension.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\dropdirectly\dropdirectlywpf\mainwindow.xaml.cs" />
     <None Include="DroppedFolderDetectHook.rgs" />
     <None Include="DroppedFolderDetectHookShellExtension.def" />
     <None Include="DroppedFolderDetectHookShellExtension.rgs" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="DroppedFolderDetectHookShellExtension.idl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\..\dropdirectly\dropdirectlywpf\mainwindow.xaml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

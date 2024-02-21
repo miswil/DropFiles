@@ -37,6 +37,9 @@
     <ClInclude Include="pch.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="DroppedFolderDetectHook.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DroppedFolderDetectHookShellExtension.cpp">
@@ -49,6 +52,9 @@
       <Filter>生成されたファイル</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="DroppedFolderDetectHook.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -64,10 +70,17 @@
     <None Include="DroppedFolderDetectHookShellExtension.def">
       <Filter>ソース ファイル</Filter>
     </None>
+    <None Include="DroppedFolderDetectHook.rgs">
+      <Filter>リソース ファイル</Filter>
+    </None>
+    <None Include="..\..\dropdirectly\dropdirectlywpf\mainwindow.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="DroppedFolderDetectHookShellExtension.idl">
       <Filter>ソース ファイル</Filter>
     </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\..\dropdirectly\dropdirectlywpf\mainwindow.xaml" />
   </ItemGroup>
 </Project>

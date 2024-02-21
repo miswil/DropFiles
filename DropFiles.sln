@@ -35,7 +35,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DropMultipleFilesComAsyncDr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DropDirectly", "DropDirectly", "{65CC6416-BAD3-4D6D-AA38-2860AD220120}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DroppedFolderDetectHookShellExtension", "DropFolderDirectly\DroppedFolderDetectHookShellExtension\DroppedFolderDetectHookShellExtension.vcxproj", "{FCFF7DF1-3FF1-419C-BF93-9542E228B306}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DroppedFolderDetectHookShellExtension", "DropDirectly\DroppedFolderDetectHookShellExtension\DroppedFolderDetectHookShellExtension.vcxproj", "{FCFF7DF1-3FF1-419C-BF93-9542E228B306}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropDirectlyWpf", "DropDirectly\DropDirectlyWpf\DropDirectlyWpf.csproj", "{DDAFF459-67D8-4F7A-8FB0-F99A85F71017}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -179,6 +181,18 @@ Global
 		{FCFF7DF1-3FF1-419C-BF93-9542E228B306}.Release|x64.Build.0 = Release|x64
 		{FCFF7DF1-3FF1-419C-BF93-9542E228B306}.Release|x86.ActiveCfg = Release|Win32
 		{FCFF7DF1-3FF1-419C-BF93-9542E228B306}.Release|x86.Build.0 = Release|Win32
+		{DDAFF459-67D8-4F7A-8FB0-F99A85F71017}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDAFF459-67D8-4F7A-8FB0-F99A85F71017}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDAFF459-67D8-4F7A-8FB0-F99A85F71017}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DDAFF459-67D8-4F7A-8FB0-F99A85F71017}.Debug|x64.Build.0 = Debug|Any CPU
+		{DDAFF459-67D8-4F7A-8FB0-F99A85F71017}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DDAFF459-67D8-4F7A-8FB0-F99A85F71017}.Debug|x86.Build.0 = Debug|Any CPU
+		{DDAFF459-67D8-4F7A-8FB0-F99A85F71017}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDAFF459-67D8-4F7A-8FB0-F99A85F71017}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDAFF459-67D8-4F7A-8FB0-F99A85F71017}.Release|x64.ActiveCfg = Release|Any CPU
+		{DDAFF459-67D8-4F7A-8FB0-F99A85F71017}.Release|x64.Build.0 = Release|Any CPU
+		{DDAFF459-67D8-4F7A-8FB0-F99A85F71017}.Release|x86.ActiveCfg = Release|Any CPU
+		{DDAFF459-67D8-4F7A-8FB0-F99A85F71017}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -195,6 +209,7 @@ Global
 		{70FFBFF9-FD59-4F05-92E1-103993AEED7C} = {6DE41EB0-E076-4812-A641-DFE902A5E971}
 		{5846095C-352E-48B3-8366-A27A7D5EE567} = {6DE41EB0-E076-4812-A641-DFE902A5E971}
 		{FCFF7DF1-3FF1-419C-BF93-9542E228B306} = {65CC6416-BAD3-4D6D-AA38-2860AD220120}
+		{DDAFF459-67D8-4F7A-8FB0-F99A85F71017} = {65CC6416-BAD3-4D6D-AA38-2860AD220120}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {555731B5-9D78-4ECB-81FA-420E09D891C7}

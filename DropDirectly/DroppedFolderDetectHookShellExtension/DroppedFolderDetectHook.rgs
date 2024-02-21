@@ -12,4 +12,14 @@ HKCR
 			Version = s '1.0'
 		}
 	}
+	NoRemove Directory
+	{
+		NoRemove shellex
+		{
+			NoRemove CopyHookHandlers
+			{
+				ForceRemove DroppedFolderDetectHook = s '{748c00ab-b809-4dd0-a2c4-9b954e9ee6d2}'
+			}
+		}
+	}
 }
